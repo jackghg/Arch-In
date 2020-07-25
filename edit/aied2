@@ -1,8 +1,9 @@
 #!/bin/bash
 exit 1 #comment this line when it's all right
 dhcpcd
-sleep 5s
+#comment the next line if you want to use homed
 systemctl mask systemd-homed.service systemd-userdbd.socket systemd-userdbd.service
+sleep 6s
 pacman -Syy
 # - Users
 groupadd sudo
