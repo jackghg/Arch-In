@@ -62,7 +62,7 @@ echo 'Internet is OK'
 fi
 aiPATH="`dirname \"$0\"`"
 aiPATH="`( cd \"$aiPATH\" && pwd )`"
-#aiPATH="/ai" # manual scripts path
+#aiPATH="/ai" # fixed scripts path
 loadkeys $aiKEYLANG
 dhcpcd
 sleep 3s

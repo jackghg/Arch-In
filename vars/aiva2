@@ -8,8 +8,11 @@ aiAE=0
 #
 aiERRORS="ERRORS:\n"
 dhcpcd
+#comment the next line if you want to use homed
+systemctl mask systemd-homed.service systemd-userdbd.socket systemd-userdbd.service
 sleep 5s
 echo 'Testing connection...'
+sleep 1s
 curl -Is http://www.google.com
 if [ $? -gt 0 ]; then
 read -p "No internet connection detected! Continue ? (y/n): " ireply
@@ -19,14 +22,17 @@ fi
 else
 echo 'Internet is OK'
 fi
-systemctl mask systemd-homed.service systemd-userdbd.socket systemd-userdbd.service
 pacman -Syy
 # - Users
 groupadd sudo
 groupadd -r autologin
 useradd -m $aiUSER
 echo "Insert the new password for ${aiUSER}:"
+if [ $aiUSERP ]; then
 printf "$aiUSERP\n$aiUSERP" | passwd $aiUSER
+else
+passwd -d $aiUSER
+fi
 usermod -aG sudo $aiUSER
 printf "\nDefaults targetpw\n%%sudo ALL=(ALL) ALL\n" >> /etc/sudoers
 #
@@ -35,7 +41,7 @@ pacman -S networkmanager network-manager-applet samba net-tools gufw --noconfirm
 
 systemctl enable NetworkManager
 # - Local Network Share
-cat << EOT > /etc/samba/smb.conf
+cat << 'EOT' > /etc/samba/smb.conf
 [global]
 workgroup = WORKGROUP
 server string = 
@@ -122,7 +128,7 @@ if [ $aiDE -gt 0 ]; then
 pacman -S htop hardinfo onboard catfish alacarte gnome-calculator gparted libreoffice-still vlc gimp firefox evince notepadqq geany claws-mail hexchat utox xboard gnuchess aisleriot --noconfirm
 pacman -S archlinux-wallpaper adapta-gtk-theme arc-gtk-theme arc-icon-theme arc-solid-gtk-theme moka-icon-theme papirus-icon-theme breeze-gtk breeze-icons materia-gtk-theme deepin-gtk-theme deepin-icon-theme elementary-icon-theme lxde-icon-theme --noconfirm
 if [ $aiDE -gt 0 ]; then
-cat << EOT > /home/${aiUSER}/.Xresources
+cat << 'EOT' > /etc/skel/.Xresources
 *.foreground: #fafdfb
 *.background: #2e3235
 *.cursorColor: #fafdfb
@@ -144,7 +150,7 @@ cat << EOT > /home/${aiUSER}/.Xresources
 *.color15: #fafdfb
 URxvt*font: xft:inconsolata:size=13:antialias=true
 EOT
-if [ -n $aiLOL ]; then
+if [ $aiLOL ]; then
 pacman -S libreoffice-still-$aiLOL --noconfirm
 fi
 pacman -R gst-plugins-bad --noconfirm
@@ -165,7 +171,6 @@ esac
 printf "\n\n --- INSTALLATION COMPLETE ---\nRemember to review and delete installation files in /root (the file ivars contains the passwords) !\n"
 if [ $aiAE -eq 1 ]; then
 echo -e $aiERRORS
-echo -e $aiERRORS > /root/install-errors.log
 fi
 read -p "Reboot ? (y/n): " ireply
 if [ "$ireply" = "y" ]; then
