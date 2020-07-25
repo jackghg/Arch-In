@@ -4,7 +4,7 @@ printf "\n\n ARCH-IN INSTALLER - part 1\nYou can press ctrl+c anytime before the
 read
 dhcpcd
 sleep 3s
-ai0a=1; ai0b=1; ai0c=1; ai0d=1; ai0e=1; ai0f=1; ai0g=1;
+ai0a=1; ai0b=1; ai0c=1; ai0d=1; ai0e=1; ai0f=1; ai0g=1; #long story,its related to the set command at the end
 aiFC=0
 (printf " --- KEYBOARD LANGUAGE ---\n Available keyboard layouts:"); ls /usr/share/kbd/keymaps/**/*.map.gz | more -d
 read -p 'Keyboard language layout [en]: ' aiKEYLANG
