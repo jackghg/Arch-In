@@ -2,10 +2,11 @@
 Arch-In is a **Arch Linux** installer scripts, easy to customize, I hope.\
 There are 2 editions:
 - ASK: It's a interactive script, it will ask you the installation details. 
-- VARS: Fill the variables in the script and run it.\
+- VARS: Fill the variables in the script and run it.
+
 Art-in is still a beta.
 
-## Generic Installation:
+## Installation common steps:
 - Backup your data !
 - Download the last arch iso, flash it to a usb drive, boot it and login as root
 - Put the 3 script files in /ai for example by mounting a drive
@@ -14,11 +15,6 @@ mkdir /ai
 mount /dev/sdc1 /ai
 cd /ai
 ```
-- Start the first part of the installer
-- When finished remove the arch iso and installer drives and restart
-- Login as root, connect to wifi if needed, and start the second part
-- Restart. Review and delete the installer files in /root
-
 ## Arch-In Ask installation:
 - Make the partitions now or in the installer with cfdisk
 - Note the partitions path in /dev for boot, system, swap. Data on these partitions will be deleted!
@@ -59,3 +55,4 @@ A very basic auto update will execute `pacman -Syyu && paccache -rk1` every 7 da
 - the installer won't connect to **wifi**. Do it manually. Internet is needed at part 2
 - home partition and extra partitions won't be mounted. Edit the fstab later
 - no encryption
+- homed services are disabled by default. I you want to use it, comment the 'systemctl mask' commands in the second script.
