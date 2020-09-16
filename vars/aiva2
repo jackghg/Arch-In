@@ -90,7 +90,7 @@ pacman -S xfce4 xfce4-goodies --noconfirm
 pacman -R xfce4-clipman-plugin --noconfirm
 ;;
 2)
-pacman -S lxde obconf slim xfce4-power-manager --noconfirm
+pacman -S lxde obconf slock xfce4-power-manager --noconfirm
 pacman -R lxdm --noconfirm
 ;;
 esac
@@ -123,10 +123,10 @@ fi
 #
 # --- Software ---
 pacman -S gnu-free-fonts font-bh-ttf ttf-liberation ttf-dejavu ttf-ubuntu-font-family ttf-linux-libertine ttf-opensans ttf-hannom ttf-hanazono ttf-baekmuk --noconfirm
-pacman -S gtk2-perl gnome-packagekit git sshfs openssh wget grub-customizer rxvt-unicode xf86-input-libinput p7zip xarchiver --noconfirm
+pacman -S gtk2-perl gtk-engine-murrine lightdm-gtk-greeter-settings gnome-packagekit git sshfs openssh wget grub-customizer rxvt-unicode xf86-input-libinput p7zip htop --noconfirm
 if [ $aiDE -gt 0 ]; then
-pacman -S htop hardinfo onboard catfish alacarte gnome-calculator gparted libreoffice-still vlc gimp firefox evince notepadqq geany claws-mail hexchat utox xboard gnuchess aisleriot --noconfirm
-pacman -S archlinux-wallpaper adapta-gtk-theme arc-gtk-theme arc-icon-theme arc-solid-gtk-theme moka-icon-theme papirus-icon-theme breeze-gtk breeze-icons materia-gtk-theme deepin-gtk-theme deepin-icon-theme elementary-icon-theme lxde-icon-theme --noconfirm
+pacman -S xarchiver hardinfo onboard catfish alacarte gnome-calculator gparted libreoffice-still vlc gimp firefox evince notepadqq geany claws-mail hexchat utox xboard gnuchess aisleriot --noconfirm
+pacman -S archlinux-wallpaper xcursor-breeze adapta-gtk-theme arc-gtk-theme arc-icon-theme arc-solid-gtk-theme moka-icon-theme papirus-icon-theme breeze-gtk breeze-icons materia-gtk-theme deepin-gtk-theme deepin-icon-theme elementary-icon-theme lxde-icon-theme --noconfirm
 if [ $aiDE -gt 0 ]; then
 cat << 'EOT' > /etc/skel/.Xresources
 *.foreground: #fafdfb
