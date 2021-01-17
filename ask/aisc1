@@ -95,19 +95,6 @@ read -p 'Libre Office language pack short locale(empty to not install): ' aiLOL
 clear
 printf ' --- AUTO UPDATE ---\nThis is a simple terminal based auto-update that runs weekly.\n 0: none\n 1: visible, asks for password\n 2: invisible\nYou can enable, disable or edit the updArch.timer and updArchS.timer. You can edit the code within updArch.service and updArchS.service in /etc/systemd/user and /etc/systemd/system\nAuto update [1]: '
 read aiUPDATE
-aiUPDATE=${aiUPDATE:-1}
-aiPATH="/ai"
-if [ ! -f ${aiPATH}/aischr ] || [ ! -f ${aiPATH}/aisc2 ]; then
-aiPATH="`dirname \"$0\"`"
-aiPATH="`( cd \"$aiPATH\" && pwd )`"
-fi
-if [ ! -f ${aiPATH}/aischr ] || [ ! -f ${aiPATH}/aisc2 ]; then
-read -p "Insert the Archin scripts path: " aiPATH
-fi
-if [ ! -f ${aiPATH}/aischr ] || [ ! -f ${aiPATH}/aisc2 ]; then
-echo "Scripts files not found. Giving up..."
-exit 1
-fi
 clear
 printf " CONFIGURATION COMPLETE !\n ---\n"
 echo " Keyboard language: $aiKEYLANG"
@@ -131,7 +118,6 @@ echo " Print tools: $aiPRINT"
 echo " Bluetooth tools: $aiBT"
 echo " Libre Office language pack: $aiLOL"
 echo " Auto update: $aiUPDATE"
-echo " Scripts path: $aiPATH"
 echo " ---"
 read -p " Start installation ? (y/n): " ireply
 if [ "$ireply" != "y" ]; then
@@ -165,10 +151,11 @@ fi
 genfstab -U /mnt >> /mnt/etc/fstab
 #
 # --- Chroot ---
-cp -f ${aiPATH}/aischr /mnt/root
-cp -f ${aiPATH}/aisc2 /mnt/root
+cp -f ./aischr /mnt/root
+cp -f ./aisc2 /mnt/root
+cp -f ./aisc1 /mnt/root
 echo '#!/bin/bash' > /mnt/root/ivars
-( set | tail -33 ) >> /mnt/root/ivars
+( set | tail -32 ) >> /mnt/root/ivars
 if [ ! -f /mnt/root/aischr ] || [ ! -f /mnt/root/aisc2 ] || [ ! -f /mnt/root/ivars ]; then
 echo "Scripts copy error"
 exit 1
