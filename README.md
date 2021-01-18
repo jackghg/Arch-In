@@ -55,7 +55,7 @@ cd /ai
 - Restart. Review and delete the installer files in /root
 
 ## Autoupdate
-A very basic auto update will execute `pacman -Syyu && paccache -rk1` every 7 days if you install it. If the update fails, see  the arch linux news, a manual fix may be needed.
+A very basic auto update will execute `pacman -Syyu && paccache -rk1` every 7 days if you install it. If the update fails, see  the arch linux news, a manual fix may be needed. Updater services and timers files are: /etc/systemd/user/updArch.service , /etc/systemd/system/updArchS.service , /etc/systemd/user/updArch.timer , /etc/systemd/system/updArchS.timer
 
 ## Warnings and limitations
 - **Backup** your data before installing Linux !
