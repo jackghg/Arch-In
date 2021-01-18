@@ -1,6 +1,5 @@
 #!/bin/bash
 # Create the partitions before.
-# you should mount the scripts disk under /ai
 printf "\n\n ARCH-IN vars - part1\nRead the guide and carefully edit the variables in this file.\nBackup your data before!\n"
 exit 1 #comment this line when it's all right
 #
@@ -60,9 +59,6 @@ fi
 else
 echo 'Internet is OK'
 fi
-aiPATH="`dirname \"$0\"`"
-aiPATH="`( cd \"$aiPATH\" && pwd )`"
-#aiPATH="/ai" # fixed scripts path
 loadkeys $aiKEYLANG
 dhcpcd
 sleep 3s
@@ -96,8 +92,9 @@ fi
 genfstab -U /mnt >> /mnt/etc/fstab
 #
 # --- Chroot ---
-cp ${aiPATH}/aivachr /mnt/root
-cp ${aiPATH}/aiva2 /mnt/root
+cp -f ./aivachr /mnt/root
+cp -f ./aiva2 /mnt/root
+cp -f ./aiva1 /mnt/root
 arch-chroot /mnt ./root/aivachr
 printf "\n\nPart 1 complete !\nRemove the Arch iso, restart, login as root, connect and execute the second part.\n"
 read -p "Reboot ? (y/n) " ireply
