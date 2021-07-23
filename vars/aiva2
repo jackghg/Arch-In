@@ -22,7 +22,7 @@ fi
 else
 echo 'Internet is OK'
 fi
-pacman -Syy
+pacman -Syyu --noconfirm
 # - Users
 groupadd sudo
 groupadd -r autologin
