@@ -25,7 +25,7 @@ else
 echo 'Internet is OK'
 fi
 systemctl mask systemd-homed.service systemd-userdbd.socket systemd-userdbd.service
-pacman -Syy
+pacman -Syyu --noconfirm
 # - Users
 groupadd sudo
 groupadd -r autologin
